@@ -16,8 +16,10 @@ final class GoodWeOutput
 
     protected $voltDc1;
     protected $currentDc1;
+    protected $powerDc1;
     protected $voltDc2;
     protected $currentDc2;
+    protected $powerDc2;
     protected $voltAc1;
     protected $voltAc2;
     protected $voltAc3;
@@ -57,8 +59,10 @@ final class GoodWeOutput
         return [
             'dateTime' => $this->dateTime->format(DATE_ATOM),
             'voltDc1' => $this->voltDc1,
+            'powerDc1' => $this->powerDc1,
             'currentDc1' => $this->currentDc1,
             'voltDc2' => $this->voltDc2,
+            'powerDc2' => $this->powerDc2,
             'currentDc2' => $this->currentDc2,
             'voltAc1' => $this->voltAc1,
             'voltAc2' => $this->voltAc2,
@@ -91,6 +95,11 @@ final class GoodWeOutput
         $this->currentDc1 = $currentDc1;
     }
 
+    public function setPowerDc1($powerDc1)
+    {
+        $this->powerDc1 = $voltDc1 * $currentDc1;
+    }
+
     public function setVoltDc2($voltDc2)
     {
         $this->voltDc2 = $voltDc2;
@@ -99,6 +108,11 @@ final class GoodWeOutput
     public function setCurrentDc2($currentDc2)
     {
         $this->currentDc2 = $currentDc2;
+    }
+
+    public function setPowerDc2($powerDc2)
+    {
+        $this->powerDc2 = $voltDc2 * $currentDc2;
     }
 
     public function setVoltAc1($voltageAc1)
@@ -232,8 +246,10 @@ final class GoodWeOutput
 
         echo 'DC1 Voltage   ' . $this->voltDc1 . 'V' . PHP_EOL;
         echo 'DC1 Current   ' . $this->currentDc1 . 'A' . PHP_EOL;
+        echo 'DC1 Power     ' . $this->powerDc1 . 'kW'. PHP_EOL;
         echo 'DC2 Voltage   ' . $this->voltDc2 . 'V' . PHP_EOL;
         echo 'DC2 Current   ' . $this->currentDc2 . 'A' . PHP_EOL;
+        echo 'DC2 Power     ' . $this->powerDc2 . 'kW'. PHP_EOL;
         echo 'AC1 Voltage   ' . $this->voltAc1 . 'V' . PHP_EOL;
         echo 'AC2 Voltage   ' . $this->voltAc2 . 'V' . PHP_EOL;
         echo 'AC3 Voltage   ' . $this->voltAc3 . 'V' . PHP_EOL;

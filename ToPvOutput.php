@@ -31,8 +31,14 @@ class ToPvOutput
                     't' => $goodWeOutput->getDateTime()->format('H:i'),
                     'v1' => $goodWeOutput->getGenerationToday() * 1000,
                     'v2' => $goodWeOutput->getPower() * 1000,
+                    //'v3' => $youlessOutput-> ..() * 1000,
+                    //'v3' => $youlessOutput-> getPower() * 1000,
                     'v5' => $goodWeOutput->getTemperature(),
                     'v6' => $goodWeOutput->getVoltageAc1(),
+                    // v7 = Power String 1
+                    //'v7' => $goodWeOutput->getPowerDc1() * 1000,
+                    // v8 = Power String 2
+                    //'v8' => $goodWeOutput->getPowerDc2() * 1000,
                 ]
             )
         );
