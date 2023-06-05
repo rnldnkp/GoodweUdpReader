@@ -15,8 +15,11 @@ final class GoodWeProcessor
         $goodweOutput->setDateTime($date);
         $goodweOutput->setVoltDc1(hexdec(bin2hex($binary[11] . $binary[12])) / 10);
         $goodweOutput->setCurrentDc1(hexdec(bin2hex($binary[13]. $binary[14])) / 10);
+        $goodweOutput->setPowerDc1((hexdec(bin2hex($binary[11] . $binary[12])) / 10) * (hexdec(bin2hex($binary[13]. $binary[14])) / 10) );
         $goodweOutput->setVoltDc2(hexdec(bin2hex($binary[15] . $binary[16])) / 10);
         $goodweOutput->setCurrentDc2(hexdec(bin2hex($binary[17]. $binary[18])) / 10);
+        $goodweOutput->setPowerDc2((hexdec(bin2hex($binary[15] . $binary[16])) / 10) * (hexdec(bin2hex($binary[17]. $binary[18])) / 10) );
+        $goodweOutput->setVoltDc( round( ((hexdec(bin2hex($binary[61] . $binary[62])) ) / ( (hexdec(bin2hex($binary[13]. $binary[14])) / 10) + (hexdec(bin2hex($binary[17]. $binary[18])) / 10) )),1));
         $goodweOutput->setVoltAc1(hexdec(bin2hex($binary[41] . $binary[42])) / 10);
         $goodweOutput->setVoltAc2(hexdec(bin2hex($binary[43] . $binary[44])) / 10);
         $goodweOutput->setVoltAc3(hexdec(bin2hex($binary[45] . $binary[46])) / 10);
@@ -38,8 +41,6 @@ final class GoodWeProcessor
         return $goodweOutput;
 
     }
-
-
 
     public static function getDateTime($binary): \DateTime
     {

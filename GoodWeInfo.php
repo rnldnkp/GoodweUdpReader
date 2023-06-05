@@ -9,6 +9,7 @@ class GoodWeInfo
     protected $dsp1version;
     protected $dsp2version;
     protected $armVersion;
+    protected $serialReply;
 
     public function __construct($serialReply)
     {

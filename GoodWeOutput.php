@@ -18,6 +18,7 @@ final class GoodWeOutput
     protected $currentDc1;
     protected $powerDc1;
     protected $voltDc2;
+    protected $voltDc;
     protected $currentDc2;
     protected $powerDc2;
     protected $voltAc1;
@@ -35,7 +36,7 @@ final class GoodWeOutput
     protected $generationToday;
     protected $generationTotal;
     protected $totalHours;
-    protected $setSafetyCode;
+    protected $SafetyCode;
     protected $rssi;
 
     public function __construct()
@@ -64,6 +65,7 @@ final class GoodWeOutput
             'voltDc2' => $this->voltDc2,
             'powerDc2' => $this->powerDc2,
             'currentDc2' => $this->currentDc2,
+            'voltDc' => $this->voltDc,
             'voltAc1' => $this->voltAc1,
             'voltAc2' => $this->voltAc2,
             'voltAc3' => $this->voltAc3,
@@ -97,7 +99,12 @@ final class GoodWeOutput
 
     public function setPowerDc1($powerDc1)
     {
-        $this->powerDc1 = $voltDc1 * $currentDc1;
+        $this->powerDc1 = $powerDc1;
+    }
+
+    public function getPowerDc1()
+    {
+        return $this->powerDc1;
     }
 
     public function setVoltDc2($voltDc2)
@@ -112,7 +119,22 @@ final class GoodWeOutput
 
     public function setPowerDc2($powerDc2)
     {
-        $this->powerDc2 = $voltDc2 * $currentDc2;
+        $this->powerDc2 = $powerDc2;
+    }
+
+    public function getPowerDc2()
+    {
+        return $this->powerDc2;
+    }
+
+    public function setVoltDc($voltDc)
+    {
+        $this->voltDc = $voltDc;
+    }
+
+    public function getVoltDc()
+    {
+        return $this->voltDc;
     }
 
     public function setVoltAc1($voltageAc1)
@@ -244,29 +266,30 @@ final class GoodWeOutput
     {
         echo 'GoodWe output from ' . $this->dateTime->format(DATE_ISO8601) . PHP_EOL;
 
-        echo 'DC1 Voltage   ' . $this->voltDc1 . 'V' . PHP_EOL;
-        echo 'DC1 Current   ' . $this->currentDc1 . 'A' . PHP_EOL;
-        echo 'DC1 Power     ' . $this->powerDc1 . 'kW'. PHP_EOL;
-        echo 'DC2 Voltage   ' . $this->voltDc2 . 'V' . PHP_EOL;
-        echo 'DC2 Current   ' . $this->currentDc2 . 'A' . PHP_EOL;
-        echo 'DC2 Power     ' . $this->powerDc2 . 'kW'. PHP_EOL;
-        echo 'AC1 Voltage   ' . $this->voltAc1 . 'V' . PHP_EOL;
-        echo 'AC2 Voltage   ' . $this->voltAc2 . 'V' . PHP_EOL;
-        echo 'AC3 Voltage   ' . $this->voltAc3 . 'V' . PHP_EOL;
-        echo 'AC1 Current   ' . $this->currentAc1 . 'A' . PHP_EOL;
-        echo 'AC2 Current   ' . $this->currentAc2 . 'A' . PHP_EOL;
-        echo 'AC3 Current   ' . $this->currentAc3 . 'A' . PHP_EOL;
-        echo 'AC1 Frequency ' . $this->frequencyAc1 . 'Hz' . PHP_EOL;
-        echo 'AC2 Frequency ' . $this->frequencyAc2 . 'Hz' . PHP_EOL;
-        echo 'AC3 Frequency ' . $this->frequencyAc3 . 'Hz' . PHP_EOL;
-        echo 'Power         ' . $this->power . 'kW'. PHP_EOL;
-        echo 'WorkMode      ' . $this->workMode . PHP_EOL;
-        echo 'WorkMode      ' . $this->getReadableWorkMode() . PHP_EOL;
-        echo 'temperature   ' . $this->temperature . '°C' . PHP_EOL;
-        echo 'Energy Today  ' . $this->generationToday . 'kWh' . PHP_EOL;
-        echo 'Energy Total  ' . $this->generationTotal . 'kWh' . PHP_EOL;
-        echo 'Total hours   ' . $this->totalHours . 'h' . PHP_EOL;
-        echo 'SafetyCode    ' . $this->SafetyCode . '-' . PHP_EOL;
-        echo 'WiFi RSSI     ' . $this->rssi . '%' . PHP_EOL;
+        echo 'DC1 Voltage    ' . $this->voltDc1 . 'V' . PHP_EOL;
+        echo 'DC1 Current    ' . $this->currentDc1 . 'A' . PHP_EOL;
+        echo 'DC1 Power      ' . $this->powerDc1 . 'W'. PHP_EOL;
+        echo 'DC2 Voltage    ' . $this->voltDc2 . 'V' . PHP_EOL;
+        echo 'DC2 Current    ' . $this->currentDc2 . 'A' . PHP_EOL;
+        echo 'DC2 Power      ' . $this->powerDc2 . 'W'. PHP_EOL;
+        echo 'DC Voltage     ' . $this->voltDc . 'V' . PHP_EOL;
+        echo 'AC1 Voltage    ' . $this->voltAc1 . 'V' . PHP_EOL;
+        echo 'AC2 Voltage    ' . $this->voltAc2 . 'V' . PHP_EOL;
+        echo 'AC3 Voltage    ' . $this->voltAc3 . 'V' . PHP_EOL;
+        echo 'AC1 Current    ' . $this->currentAc1 . 'A' . PHP_EOL;
+        echo 'AC2 Current    ' . $this->currentAc2 . 'A' . PHP_EOL;
+        echo 'AC3 Current    ' . $this->currentAc3 . 'A' . PHP_EOL;
+        echo 'AC1 Frequency  ' . $this->frequencyAc1 . 'Hz' . PHP_EOL;
+        echo 'AC2 Frequency  ' . $this->frequencyAc2 . 'Hz' . PHP_EOL;
+        echo 'AC3 Frequency  ' . $this->frequencyAc3 . 'Hz' . PHP_EOL;
+        echo 'Power          ' . $this->power . 'kW'. PHP_EOL;
+        echo 'WorkMode       ' . $this->workMode . PHP_EOL;
+        echo 'WorkMode       ' . $this->getReadableWorkMode() . PHP_EOL;
+        echo 'temperature    ' . $this->temperature . '°C' . PHP_EOL;
+        echo 'Energy Today   ' . $this->generationToday . 'kWh' . PHP_EOL;
+        echo 'Energy Total   ' . $this->generationTotal . 'kWh' . PHP_EOL;
+        echo 'Total hours    ' . $this->totalHours . 'h' . PHP_EOL;
+        echo 'SafetyCode     ' . $this->SafetyCode . '-' . PHP_EOL;
+        echo 'WiFi RSSI      ' . $this->rssi . '%' . PHP_EOL;
     }
 }
